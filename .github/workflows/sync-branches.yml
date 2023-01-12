@@ -8,8 +8,18 @@ on:
       - master
 
 jobs:
+
+  get-branch:
+   runs-on: ubuntu-latest
+    
+  name: Extract branch name
+  steps:
+    - name: branch name
+      run: echo running on branch ${GITHUB_REF##*/}
+    
   sync-branches:
     runs-on: ubuntu-latest
+
     name: Syncing branches
     steps:
       - name: Checkout
@@ -24,4 +34,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           FROM_BRANCH: 'master'
-          TO_BRANCH: 'develop'
+          TO_BRANCH: 'extract_branch'
